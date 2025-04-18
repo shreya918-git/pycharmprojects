@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NER Analysis - NLP App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fcecec; /* Light pink background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column; /* Stacks the content vertically */
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 48px;
+            margin-bottom: 60px;
+            font-weight: bold;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            resize: none;
+            height: 180px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result-section {
+            margin-top: 20px;
+        }
+
+        ul {
+            text-align: left;
+            margin-top: 10px;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        li {
+            font-size: 16px;
+            margin: 8px 0;
+        }
+
+        li strong {
+            color: #4CAF50;
+        }
+
+        .entity-label {
+            font-style: italic;
+            color: #555;
+        }
+
+        .logout-link {
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #f44336;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .logout-link:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+    <h1>NLP App</h1>
+<div class="container">
+    <h2>Intent Analysis</h2>
+    <form action="/perform_intent" method="POST">
+        <textarea name="text" placeholder="Enter text for Intent analysis..." required></textarea>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if intent_results %}
+    <div class="result-section">
+        <h2>Predicted Intents:</h2>
+        <ul>
+            {% for label, score in intent_results %}
+                <li><strong>{{ label }}</strong>: {{ (score * 100) | round(2) }}%</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+</div>
+
+        <!-- Logout Anchor Tag -->
+        <a href="/" class="logout-link">Logout</a>
+    </div>
+</body>
+</html>
