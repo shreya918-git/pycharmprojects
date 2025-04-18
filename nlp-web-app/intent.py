@@ -1,8 +1,9 @@
 import requests
+import os
 
 API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-mnli"
 headers = {
-    "Authorization": "Bearer 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"
+    "Authorization": f"Bearer {os.getenv("Huggingface_token")}"
 }
 
 def query(payload):
