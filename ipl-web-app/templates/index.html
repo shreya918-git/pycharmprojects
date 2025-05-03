@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IPL Web App</title>
+</head>
+<body>
+<form action="/perform_analysis" method="get">
+    <label>Team1</label><br><br>
+    <select name="team1"><br>
+        {%for i in teams%}
+            <option>{{i}}</option>
+        {%endfor%}
+    </select><br><br>
+    <label>Team2</label><br><br>
+    <select name="team2"><br>
+        {%for i in teams%}
+            <option>{{i}}</option>
+        {%endfor%}
+    </select><br><br>
+    <input type="submit" value="Find Track Record">
+</form>
+{%if response%}
+    {%for i,j in response.items()%}
+    <p>{{i}}:{{j}}</p>
+    {%endfor%}
+{%endif%}
+</body>
+</html>
