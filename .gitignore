@@ -1,1 +1,8 @@
-.venv
+*.pkl
+*.csv
+*.npy
+*.whl
+__pycache__/
+.ipynb_checkpoints/
+.env
+.venv/
