@@ -10,6 +10,20 @@ st.title("Laptop Price Predictor")
 
 df=pickle.load(open("df.pkl","rb"))
 pipe=pickle.load(open("pipe.pkl","rb"))
+from xgboost import XGBRegressor
+from sklearn.ensemble import StackingRegressor
+
+# Access the stacking regressor
+stacking = pipe.named_steps['step2']
+
+# Remove 'gpu_id' from each estimator if it exists
+for name, est in stacking.estimators:
+    if isinstance(est, XGBRegressor) and hasattr(est, "gpu_id"):
+        delattr(est, "gpu_id")
+
+# Also from final estimator if needed
+if isinstance(stacking.final_estimator_, XGBRegressor) and hasattr(stacking.final_estimator_, "gpu_id"):
+    delattr(stacking.final_estimator_, "gpu_id")
 
 
 company=st.selectbox("Select a company",df["Company"].unique())
